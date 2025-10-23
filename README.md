@@ -19,4 +19,4 @@ A modern, beautiful Minecraft server management panel with Docker integration, p
 Run the installation script:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/pauli/minecraft-panel/main/install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/panie18/minecraft-panel/main/install.sh | sudo bash
