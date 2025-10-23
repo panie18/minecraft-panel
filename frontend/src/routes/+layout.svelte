@@ -1,36 +1,24 @@
-<script>
-  import { theme } from '$lib/theme';
-  import { navigating } from '$app/stores';
-  import { fade, fly } from 'svelte/transition';
-  import { cubicInOut } from 'svelte/easing';
-  import { Toaster } from 'svelte-french-toast';
-  import '@huntabyte/bits-ui/styles/bits-ui.css';
-  import '../app.css';
+<script lang="ts">
+  import '../app.postcss';
+  import { Toaster } from 'svelte-sonner';
+  import { fade } from 'svelte/transition';
+  
+  // Komponenten importieren
+  import { Button } from '$lib/components/ui/button';
 </script>
 
-<div class="app min-h-screen flex flex-col" style="background-color: {theme.colors.background};">
-  <!-- Modern header with subtle beige gradient -->
-  <header 
-    class="shadow-soft transition-all duration-300"
-    style="
-      background: linear-gradient(to right, {theme.colors.secondary}, {theme.colors.primary});
-      border-bottom-left-radius: {theme.radius.lg}; 
-      border-bottom-right-radius: {theme.radius.lg};
-    "
-  >
+<div class="min-h-screen bg-beige-100 font-satoshi flex flex-col">
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-beige-300 to-beige-500 shadow-md">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm">
+        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
           <!-- Minecraft cube logo with subtle animation -->
           <div class="minecraft-cube"></div>
         </div>
         <div>
-          <h1 class="text-xl font-bold" style="color: {theme.colors.text.primary};">
-            Minecraft Panel
-          </h1>
-          <p class="text-xs" style="color: {theme.colors.text.secondary};">
-            Manage your servers with style
-          </p>
+          <h1 class="text-xl font-bold text-beige-900">Minecraft Panel</h1>
+          <p class="text-xs text-beige-700">Manage your servers with style</p>
         </div>
       </div>
       
@@ -46,42 +34,29 @@
     </div>
   </header>
 
-  <!-- Page content with smooth animation -->
+  <!-- Main content -->
   <main class="flex-grow container mx-auto px-4 py-6">
-    {#if $navigating}
-      <div class="flex justify-center items-center py-20">
-        <div class="spinner"></div>
-      </div>
-    {:else}
-      <div in:fade={{ duration: 400, easing: cubicInOut, delay: 100 }}>
-        <slot></slot>
-      </div>
-    {/if}
+    <div in:fade={{ duration: 300, delay: 100 }}>
+      <slot />
+    </div>
   </main>
 
-  <!-- Modern footer with attribution -->
-  <footer style="
-    background-color: {theme.colors.primary}; 
-    border-top-left-radius: {theme.radius.lg}; 
-    border-top-right-radius: {theme.radius.lg};
-  ">
-    <div class="container mx-auto px-4 py-6">
+  <!-- Footer -->
+  <footer class="bg-beige-500 text-beige-50 py-6">
+    <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="mb-4 md:mb-0" style="color: {theme.colors.text.light};">
-          © {new Date().getFullYear()} Minecraft Panel
-        </p>
+        <p class="mb-4 md:mb-0">© {new Date().getFullYear()} Minecraft Panel</p>
         
         <div class="flex items-center">
-          <span class="text-sm" style="color: {theme.colors.text.light};">Made with</span>
+          <span class="text-sm">Made with</span>
           <span class="mx-1 text-red-500">❤️</span>
-          <span class="text-sm font-semibold" style="color: {theme.colors.text.light};">by Pauli</span>
+          <span class="text-sm font-bold">by Pauli</span>
         </div>
       </div>
     </div>
   </footer>
-
-  <!-- Toast notifications -->
-  <Toaster position="bottom-right" />
+  
+  <Toaster richColors />
 </div>
 
 <style>
@@ -115,8 +90,8 @@
   
   /* Spinning cube animation */
   .minecraft-cube {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     background-color: #B6AB97;
     animation: cube-rotate 12s infinite cubic-bezier(0.4, 0, 0.2, 1);
     transform-style: preserve-3d;
@@ -126,19 +101,5 @@
     0% { transform: rotateX(0) rotateY(0); }
     50% { transform: rotateX(180deg) rotateY(180deg); }
     100% { transform: rotateX(360deg) rotateY(360deg); }
-  }
-  
-  /* Loading spinner */
-  .spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(182, 171, 151, 0.2);
-    border-radius: 50%;
-    border-top-color: #B6AB97;
-    animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-  
-  @keyframes spin {
-    to { transform: rotate(360deg); }
   }
 </style>
