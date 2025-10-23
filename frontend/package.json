@@ -1,0 +1,23 @@
+{
+  "name": "minecraft-panel-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.4.2",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "svelte": "^5.0.0",
+    "tailwindcss": "^4.0.0",
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "@huntabyte/shadcn-svelte": "^1.0.9",
+    "svelte-sonner": "^1.0.5"
+  }
+}
